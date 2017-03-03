@@ -1,3 +1,5 @@
+OUT="> /dev/null 2>&1"
+
 figlet -c 'perfect look'
 figlet -c -f small 'enjoyful'
 
@@ -50,6 +52,7 @@ cp -rf "Flat-Remix/Flat Remix" ~/.icons
 echo 'Installing Luv icon pack...'
 git clone https://github.com/NitruxSA/luv-icon-theme.git
 cp -rf ./luv-icon-theme/L* ~/.icons
+
 
 #cp -rf ./Wallpapers ~/Pictures/Wallpapers
 echo 'Downloading fonts...'

@@ -1,5 +1,4 @@
 figlet -c 'perfect apps'
-figlet -c -f small 'whatever tools'
 
 echo 'Installing Chrome...'
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
@@ -50,5 +49,55 @@ sudo apt-get install bleachbit -yqq
 # echo 'Installing recordmydesktop...'
 # sudo apt-get install gtk-recordmydesktop -yqq
 
-# echo 'Installing green-recorder...'
+
 # sudo apt install green-recorder -yqq
+
+sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder -y > ~/Desktop/perfect.log 2>&1
+sudo apt-get update > ~/Desktop/perfect.log 2>&1
+sudo apt-get install simplescreenrecorder -yqq  > ~/Desktop/perfect.log 2>&1
+
+sudo add-apt-repository ppa:peek-developers/stable -y  > ~/Desktop/perfect.log 2>&1
+sudo apt-get update > ~/Desktop/perfect.log 2>&1
+sudo apt install peek -yqq > ~/Desktop/perfect.log 2>&1
+# sudo add-apt-repository ppa:docky-core/ppa
+# sudo apt-get update
+# sudo apt-get install docky
+
+# sudo apt-get install docker-engine
+# sudo apt-get purge apt-xapian-index
+
+sudo add-apt-repository ppa:eviltwin1/feedreader-stable
+sudo apt-get update
+# splash
+
+# sudo add-apt-repository ppa:noobslab/themes
+# sudo apt-get update
+# sudo apt-get install mbuntu-y-bscreen-v4
+
+sudo add-apt-repository ppa:gerardpuig/ppa
+sudo apt-get update && sudo apt-get install ubuntu-cleaner -yq
+# login screen. looks perfect but dangerous (not tested)
+# sudo add-apt-repository ppa:noobslab/themes
+# sudo apt-get update
+# sudo apt-get install mbuntu-y-lightdm-v4
+
+# sudo add-apt-repository ppa:agornostal/ulauncher -y  > ~/Desktop/perfect.log 2>&1
+# sudo apt-get update > ~/Desktop/perfect.log 2>&1
+# sudo apt-get install ulauncher > ~/Desktop/perfect.log 2>&1
+# figlet -c -f small "vimix theme"
+# echo "https://github.com/vinceliuice/vimix-gtk-themes"
+# echo "Installing..."
+# echo "Adding PPA..."
+# sudo add-apt-repository ppa:noobslab/themes -y > ~/Desktop/perfect.log 2>&1
+# echo "Ok. Update reps then..."
+# sudo apt-get update > ~/Desktop/perfect.log 2>&1
+# echo "Ok. Now install..."
+# sudo apt-get install vimix-gtk-themes -yqq > ~/Desktop/perfect.log 2>&1
+# sudo apt-get install vimix-flat-themes -yqq > ~/Desktop/perfect.log 2>&1
+
+
+figlet -c -f small 'screen capture tools'
+3
+echo 'Installing green-recorder...'
+sudo add-apt-repository ppa:mhsabbagh/greenproject -y >> ~/perfect-install.log
+sudo apt update && sudo apt install green-recorder -yqq >> ~/perfect-install.log
