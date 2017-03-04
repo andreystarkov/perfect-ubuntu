@@ -33,10 +33,10 @@ sudo apt-get install synaptic gdebi -yqq
 
 chmod +x ./*.sh
 
-sh ./perfect-dev.sh
-sh ./perfect-look.sh
-sh ./perfect-apps.sh
-sh ./perfect-tweaks.sh
+#sh ./perfect-dev.sh
+#sh ./perfect-look.sh
+#sh ./perfect-apps.sh
+#sh ./perfect-tweaks.sh
 
 sudo apt-get -fqq install
 sudo apt-get -yqq autoremove
