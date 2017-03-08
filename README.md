@@ -15,7 +15,10 @@ Tested on 16.10/16.04.
 #### Usage:
 
 ```
-  sh perfect-ubuntu.sh
+  git clone https://github.com/andreystarkov/perfect-ubuntu
+  cd ~/perfect-ubuntu
+  chmod +x perfect-ubuntu.sh
+  ./perfect-ubuntu.sh
 ```
 
 ## TODO
