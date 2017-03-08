@@ -77,12 +77,6 @@ for (( i = 30; i <= 37; i++ ));
 do echo -e "\e[0;"$i"m  Hi stackoverflow";
 done
 
-# -------------------------------------------------------
-
-# This is the color switch \033[. See history.
-# Color codes are like 1;32 (Light Green), 0;34 (Blue), 1;34 (Light Blue), etc.
-# We terminate color sequences with a color switch \033[ and 0m, the no-color code. Just like opening and closing tabs in a markup language.
-
 SWITCH="\033["
 NORMAL="${SWITCH}0m"
 YELLOW="${SWITCH}1;33m"
@@ -120,30 +114,3 @@ echo "$text"
 
 cecho "Normal"
 cecho y "Yellow!"
-
-# ---------------------------------------------------------
-
-function coloredEcho(){
-    local exp=$1;
-    local color=$2;
-    if ! [[ $color =~ '^[0-9]$' ]] ; then
-       case $(echo $color | tr '[:upper:]' '[:lower:]') in
-        black) color=0 ;;
-        red) color=1 ;;
-        green) color=2 ;;
-        yellow) color=3 ;;
-        blue) color=4 ;;
-        magenta) color=5 ;;
-        cyan) color=6 ;;
-        white|*) color=7 ;; # white or invalid color
-       esac
-    fi
-    tput setaf $color;
-    echo $exp;
-    tput sgr0;
-}
-
-coloredEcho "This text is green" green
-# coloredEcho "This text is green" 2
-
-# ------------------------------------------------------
