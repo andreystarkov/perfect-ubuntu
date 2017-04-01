@@ -6,7 +6,7 @@
 # Passed fine on 16.10
 
 HOME_ROOT="/home/deo"
-GIT_NAME="Andrey Starkov"
+GIT_NAME="andreystarkov"
 GIT_EMAIL="im@andreystarkov.ru"
 OUT=" >> ~/Desktop/perfect.log 2>&1"
 
@@ -50,22 +50,23 @@ sudo add-apt-repository ppa:teejee2008/ppa -y
 sudo add-apt-repository ppa:geary-team/releases -y
 sudo add-apt-repository ppa:wine/wine-builds -y
 sudo add-apt-repository ppa:mhsabbagh/greenproject -y
+sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
 
 sudo dpkg --add-architecture amd64
 
 cecho 'Updating repositories...' yellow
 sudo apt-get update
 cecho 'Upgrading...' cyan
-sudo apt upgrade
-
+sudo apt-get upgrade
+sudo apt-get dist-upgrade -y
 cecho 'Installing preload...' yellow
 sudo apt-get install preload -yqq
 cecho 'Installing must-have tools...'
 sudo apt-get install plank -yqq
-sudo apt install gnome-tweak-tool -yqq
-sudo apt install unity-tweak-tool -yqq
-sudo apt install ubuntu-restricted-extras -yqq
-sudo apt install libavcodec-extra -yqq
+sudo apt-get install gnome-tweak-tool -yqq
+sudo apt-get install unity-tweak-tool -yqq
+sudo apt-get install ubuntu-restricted-extras -yqq
+# sudo apt-get install libavcodec-extra -yqq
 sudo apt-get install synaptic gdebi -yqq
 
 cp -rf ./Wallpapers ~/Pictures/Wallpapers
@@ -78,11 +79,13 @@ cp -rf ./Wallpapers ~/Pictures/Wallpapers
 
 figlet -c 'Development'
 
+figlet -f small -c '31337/true'
+
 cecho 'Installing git...' red
 sudo apt-get install git git-gui kdiff3 -yqq
 cecho 'Installing nodejs...' magenta
 sudo apt-get install nodejs -yqq
-sudo apt install build-essential libssl-dev -yqq
+sudo apt-get install build-essential libssl-dev -yqq
 cecho 'Installing nvm...' yellow
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 sudo npm install -g node
@@ -106,14 +109,14 @@ stow --target=${HOME_ROOT} zsh
 sudo apt-get install ranger -yqq
 cd ~
 
-echo 'Setting up git...'
+cecho 'Setting up git...' cyan
 git config --global user.name $GIT_NAME
 git config --global user.email $GIT_EMAIL
 git config --global merge.tool kdiff3
 git config --global mergetool.keepBackup false
 git config --global credential.helper cache
 
-echo 'Installing Atom...'
+cecho 'Installing Atom...' red
 sudo apt-get install atom -yqq
 apm install sync-settings
 
@@ -131,9 +134,9 @@ cd ~
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install-papirus-home-gtk.sh | sh
 # sudo apt-get install papirus-gtk-icon-theme -y'
 
-cecho "Installing Numix..." red
-sudo apt-get install numix-* -yqq
-cd /tmp
+# cecho "Installing Numix..." red
+# sudo apt-get install numix-* -yqq
+# cd /tmp
 
 cecho "Installing Plank themes..." magenta
 wget http://github.com/KenHarkey/plank-themes/archive/master.zip
@@ -150,8 +153,6 @@ rm ./master.zip
 cd ~/
 
 cecho "Installing Paper GTK Theme" cyan
-sudo add-apt-repository ppa:snwh/pulp -y
-sudo apt-get update
 sudo apt-get install paper-gtk-theme -yqq
 sudo apt-get install paper-icon-theme -yqq
 
@@ -159,8 +160,6 @@ cecho "Installing Arc Themes & Icons" red
 sudo apt-get install arc-* -yqq
 
 cecho "Installing Vimix Theme" yellow
-sudo add-apt-repository ppa:noobslab/themes -y
-sudo apt-get update
 sudo apt-get install vimix-gtk-themes -yqq
 sudo apt-get install vimix-flat-themes -yqq
 
@@ -182,7 +181,6 @@ cecho 'Installing Luv icon pack...' blue
 git clone https://github.com/NitruxSA/luv-icon-theme.git
 cp -rf ./luv-icon-theme/L* ~/.icons
 
-
 cecho 'Downloading Google fonts...' yellow
 wget https://raw.githubusercontent.com/hotice/webupd8/master/install-google-fonts
 chmod +x install-google-fonts
@@ -195,9 +193,11 @@ sudo unzip mac-fonts.zip -d /usr/share/fonts
 rm mac-fonts.zip
 sudo fc-cache -f -v
 
+# git clone https://github.com/supermarin/YosemiteSanFranciscoFont.git ~/Desktop
+
 # plank themes
-cecho 'Installing Plank theme...' magenta
-sudo apt install plank -yqq
+cecho 'Installing Plank themes...' magenta
+sudo apt-get install plank -yqq
 git clone https://github.com/KenHarkey/plank-themes ~/plank-themes
 cd ~/plank-themes
 bash ./install.sh
@@ -213,12 +213,20 @@ cd ~ && mkdir -p ~/.temp-plank-themer && cd ~/.temp-plank-themer && wget https:/
 
 figlet -c 'system tweaks'
 
-echo 'Disabling guest session...'
-sudo sh -c "echo 'allow-guest=false' >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
-
-echo 'Enabling minimize on click...'
-gsettings set org.compiz.unityshell:/org/compiz/profiles/un
-
+cecho "." yellow
+# sudo sh -c "echo 'allow-guest=false' >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+dconf write /org/compiz/profiles/unity/plugins/unityshell/icon-size 28
+gsettings set com.canonical.Unity.Launcher launcher-position Left
+gconftool-2 --type int --set "/apps/compiz-1/plugins/unityshell/screen0/options/launcher_hide_mode" 1
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+# gsettings set org.gnome.desktop.interface gtk-theme 'Vimixdark'
+# gsettings set org.gnome.desktop.wm.preferences theme "Vimixdark"
+# gconftool-2 --set "/apps/compiz-1/plugins/unityshell/screen0/options/launcher_hide_mode" --type string "1"
+sudo service apport stop
+# sudo echo "enabled=0" > /etc/default/apport
+sudo apt-get purge apport
+cecho ".." magenta
 # swap tweak
 # sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
 
@@ -238,61 +246,60 @@ gsettings set org.compiz.unityshell:/org/compiz/profiles/un
 
 figlet -c 'Apps & tools'
 
-echo 'Installing Chrome...'
+cecho 'Installing Chrome...' yellow
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-sudo apt update
+sudo apt-get update
 sudo apt-get install google-chrome-stable -yqq
 
-echo 'Installing Firefox...'
+cecho 'Installing Firefox...' red
 sudo apt-get install firefox -yqq
 
-echo 'Installing core apps...'
+cecho 'Installing core apps...' magenta
 sudo apt-get install indicator-multiload virtualbox virtualbox-guest-additions-iso -yqq
 sudo apt-get install vlc shutter deluge -yqq
 sudo apt-get install gpick -yqq
 
-echo 'Installing inkscape...'
+cecho 'Installing Inkscape...' blue
 sudo apt-get install inkscape -yqq
 
-echo 'Installing Compizconfig Settings Manager...'
+cecho 'Installing Compizconfig...' white
 sudo apt-get install compizconfig-settings-manager -yqq
+sudo apt-get install compiz-plugins -yqq
+# echo 'Installing WineHQ...'
 
-echo 'Installing WineHQ...'
+cecho 'Installing Dropbox...' dropbox yellow
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
-echo 'Installing Bleachbit...'
+cecho 'Installing Bleachbit...' cyan
 sudo apt-get install bleachbit -yqq
 
 sudo apt-get -yqq install y-ppa-manager
-
+sudo apt-get install steam -yqq
 # echo 'Installing alternative launchers (albert, slingscold)...'
 # sudo apt-get install albert slingscold -yqq
-# sudo apt install libertine libertine-scope libertine-tools -yqq
+# sudo apt-get install libertine libertine-scope libertine-tools -yqq
 
 cecho 'Graphic tools installing...' cyan
 # useful graphics editing apps
 # sudo apt-get install darktable -y
-# sudo apt install rawtherapee -y
+# sudo apt-get install rawtherapee -y
 
 sudo apt-get install mypaint -yqq
 
 # sudo apt-get install aptik -yqq
 
-# echo 'Installing Geary mail client...'
-# sudo apt install geary -yqq
+cecho 'Installing Geary mail client...' red
+sudo apt-get install geary -yqq
 
 # echo 'Installing recordmydesktop...'
 # sudo apt-get install gtk-recordmydesktop -yqq
-# sudo apt install green-recorder -yqq
+# sudo apt-get install green-recorder -yqq
 
-sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder -y
-sudo apt-get update
 sudo apt-get install simplescreenrecorder -yqq
 
 cecho 'Installing Peek...' yellow
-sudo add-apt-repository ppa:peek-developers/stable
-sudo apt update
-sudo apt install peek
+sudo apt-get install peek -yqq
 
 # sudo add-apt-repository ppa:docky-core/ppa
 # sudo apt-get update
@@ -320,14 +327,12 @@ sudo apt-get install ubuntu-cleaner -yq
 
 cecho 'Installing Telegram...' yellow
 
-sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
+
 sudo apt-get update
 sudo apt-get install unity-webapps-telegram -yqq
 
 cecho 'Installing Green Recorder...' green
-sudo add-apt-repository ppa:mhsabbagh/greenproject -y
-sudo apt update -yqq
-sudo apt install green-recorder -yqq
+sudo apt-get install green-recorder -yqq
 
 sudo apt-get -fqq install
 sudo apt-get -yqq autoremove
