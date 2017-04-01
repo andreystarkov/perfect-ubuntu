@@ -183,17 +183,26 @@ git clone https://github.com/NitruxSA/luv-icon-theme.git
 cp -rf ./luv-icon-theme/L* ~/.icons
 
 
-cecho 'Downloading Google fonts...'
+cecho 'Downloading Google fonts...' yellow
 wget https://raw.githubusercontent.com/hotice/webupd8/master/install-google-fonts
 chmod +x install-google-fonts
-echo 'Installing fonts...'
+cecho 'Installing fonts...' red
 ./install-google-fonts
 
-echo 'Installing Mac fonts...'
+cecho 'Installing Mac fonts...' cyan
 wget -O mac-fonts.zip http://drive.noobslab.com/data/Mac/macfonts.zip
 sudo unzip mac-fonts.zip -d /usr/share/fonts
 rm mac-fonts.zip
 sudo fc-cache -f -v
+
+# plank themes
+cecho 'Installing Plank theme...' magenta
+sudo apt install plank -yqq
+git clone https://github.com/KenHarkey/plank-themes ~/plank-themes
+cd ~/plank-themes
+bash ./install.sh
+cd ~ && mkdir -p ~/.temp-plank-themer && cd ~/.temp-plank-themer && wget https://github.com/rhoconlinux/plank-themer/archive/master.zip && unzip master.zip && cd plank-themer-master/ && rm -fR ~/.config/plank/dock1/theme_index; rm -fR ~/.config/plank/dock1/themes-repo; cp -a theme_index/ ~/.config/plank/dock1 && cp -a themes-repo/ ~/.config/plank/dock1 && cd ~ && rm -R ~/.temp-plank-themer && sh ~/.config/plank/dock1/theme_index/plank-on-dock-themer.sh
+
 
 #   ____            _                   _                      _
 #  / ___| _   _ ___| |_ ___ _ __ ___   | |___      _____  __ _| | _____
@@ -293,7 +302,7 @@ sudo apt install peek
 sudo apt-get purge apt-xapian-index
 
 
-cecho 'Installing Ubuntu Cleaner...' green
+cecho 'Installing Ubuntu Cleaner...' cyan
 sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo apt-get update
 sudo apt-get install ubuntu-cleaner -yq
@@ -315,12 +324,15 @@ sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
 sudo apt-get update
 sudo apt-get install unity-webapps-telegram -yqq
 
-echo 'Installing Green Recorder...'
-sudo add-apt-repository ppa:mhsabbagh/greenproject -y >> ~/perfect-install.log
-sudo apt update -yqq >> ~/perfect-install.log
-sudo apt install green-recorder -yqq >> ~/perfect-install.log
+cecho 'Installing Green Recorder...' green
+sudo add-apt-repository ppa:mhsabbagh/greenproject -y
+sudo apt update -yqq
+sudo apt install green-recorder -yqq
 
-sudo apt-get -fqq install >> ~/perfect-install.log
-sudo apt-get -yqq autoremove >> ~/perfect-install.log
-sudo apt-get -yqq autoclean >> ~/perfect-install.log
-sudo apt-get -yqq clean >> ~/perfect-install.log
+sudo apt-get -fqq install
+sudo apt-get -yqq autoremove
+sudo apt-get -yqq autoclean
+sudo apt-get -yqq clean
+
+unity-tweak-tool &
+plank --preferences &
