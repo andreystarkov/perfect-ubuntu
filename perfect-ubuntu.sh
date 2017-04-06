@@ -51,6 +51,8 @@ sudo add-apt-repository ppa:geary-team/releases -y
 sudo add-apt-repository ppa:wine/wine-builds -y
 sudo add-apt-repository ppa:mhsabbagh/greenproject -y
 sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 sudo dpkg --add-architecture amd64
 
@@ -80,6 +82,9 @@ cp -rf ./Wallpapers ~/Pictures/Wallpapers
 figlet -c 'Development'
 
 figlet -f small -c '31337/true'
+
+cecho 'Installing yarn...' cyan
+sudo apt-get install yarn -yqq
 
 cecho 'Installing git...' red
 sudo apt-get install git git-gui kdiff3 -yqq
