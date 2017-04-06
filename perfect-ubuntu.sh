@@ -125,6 +125,11 @@ cecho 'Installing Atom...' red
 sudo apt-get install atom -yqq
 apm install sync-settings
 
+cecho 'Install React tools....' magenta
+npm install -g create-react-native-app
+npm install -g create-react-app
+npm install -h npm-check-updates
+
 #   _                _       ___      __           _
 #  | |    ___   ___ | | __  ( _ )    / _| ___  ___| |
 #  | |   / _ \ / _ \| |/ /  / _ \/\ | |_ / _ \/ _ \ |
