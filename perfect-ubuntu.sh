@@ -38,19 +38,20 @@ cecho 'Perfect enviroment for 16.04/16.10' magenta
 cecho 'https://github.com/andreystarkov/perfect-ubuntu' cyan
 cecho 'Adding repositories...' yellow
 
-#sudo apt-add-repository ppa:docky-core/stable -y
 #sudo add-apt-repository ppa:tualatrix/ppa -y
 sudo add-apt-repository ppa:webupd8team/atom -y
 sudo add-apt-repository ppa:dhor/myway -y
 sudo add-apt-repository ppa:pmjdebruijn/darktable-unstable -y
 sudo add-apt-repository ppa:noobslab/themes -y
 sudo add-apt-repository ppa:noobslab/macbuntu -y
-sudo add-apt-repository ppa:wine/wine-builds -y
+sudo add-apt-repository ppa:wine/wine-builds
 sudo add-apt-repository ppa:teejee2008/ppa -y
 sudo add-apt-repository ppa:geary-team/releases -y
-sudo add-apt-repository ppa:wine/wine-builds -y
 sudo add-apt-repository ppa:mhsabbagh/greenproject -y
 sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
+sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y
+sudo add-apt-repository ppa:gerardpuig/ppa -y
+sudo add-apt-repository ppa:hluk/copyq -y
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -89,8 +90,33 @@ sudo apt-get install yarn -yqq
 cecho 'Installing git...' red
 sudo apt-get install git git-gui kdiff3 -yqq
 cecho 'Installing nodejs...' magenta
+sudo apt-get install build-essential -yqq
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install nodejs -yqq
-sudo apt-get install build-essential libssl-dev -yqq
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+cecho 'Installing required tools...' blue
+sudo apt-get install libssl-dev automake -yqq
+sudo apt-get install python-dev -yqq
+sudo npm install -g flow-bin -yqq
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq
+
+cecho 'Installing watchman...' magenta
+git clone https://github.com/facebook/watchman.git
+cd watchman
+git checkout v4.1.0
+./autogen.sh
+./configure
+make
+sudo make install
+cd ~
+
+# cecho 'Installing React Native CLI...' red
+# curl -0 -L https://npmjs.org/install.sh | sudo sh.
+# cecho 'Installing Android Studio...' cyan
+# sudo add-apt-repository ppa:paolorotolo/android-studio -Y
+# sudo apt-get install android-studio -yqq
+
 cecho 'Installing nvm...' yellow
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 sudo npm install -g node
@@ -125,10 +151,24 @@ cecho 'Installing Atom...' red
 sudo apt-get install atom -yqq
 apm install sync-settings
 
-cecho 'Install React tools....' magenta
-npm install -g create-react-native-app
-npm install -g create-react-app
-npm install -h npm-check-updates
+cecho 'Install React/Native tools....' yellow
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq   
+git clone https://github.com/facebook/watchman.git
+cd watchman
+git checkout v4.1.0  # the latest stable release
+./autogen.sh
+./configure
+make
+sudo make install
+
+sudo npm install -g flow-bin
+sudo npm install -g create-react-native-app
+sudo npm install -g create-react-app
+sudo npm install -g npm-check-updates
+sudo npm install -g react-native-cli
+sudo npm install -g ignite-cli
+
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
 
 #   _                _       ___      __           _
 #  | |    ___   ___ | | __  ( _ )    / _| ___  ___| |
@@ -276,7 +316,10 @@ sudo apt-get install inkscape -yqq
 cecho 'Installing Compizconfig...' white
 sudo apt-get install compizconfig-settings-manager -yqq
 sudo apt-get install compiz-plugins -yqq
-# echo 'Installing WineHQ...'
+
+cecho 'Installing WineHQ...' yellow
+sudo dpkg --add-architecture i386
+sudo apt-get install --install-recommends winehq-devel -yqq
 
 cecho 'Installing Dropbox...' dropbox yellow
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
@@ -304,24 +347,15 @@ sudo apt-get install geary -yqq
 
 # echo 'Installing recordmydesktop...'
 # sudo apt-get install gtk-recordmydesktop -yqq
-# sudo apt-get install green-recorder -yqq
 
 sudo apt-get install simplescreenrecorder -yqq
 
 cecho 'Installing Peek...' yellow
 sudo apt-get install peek -yqq
 
-# sudo add-apt-repository ppa:docky-core/ppa
-# sudo apt-get update
-# sudo apt-get install docky
-
-#sudo apt-get install docker-engine
 sudo apt-get purge apt-xapian-index
 
-
 cecho 'Installing Ubuntu Cleaner...' cyan
-sudo add-apt-repository ppa:gerardpuig/ppa -y
-sudo apt-get update
 sudo apt-get install ubuntu-cleaner -yq
 
 # login screen. looks perfect but dangerous (not tested)
@@ -336,9 +370,6 @@ sudo apt-get install ubuntu-cleaner -yq
 #sudo apt-get install ulauncher
 
 cecho 'Installing Telegram...' yellow
-
-
-sudo apt-get update
 sudo apt-get install unity-webapps-telegram -yqq
 
 cecho 'Installing Green Recorder...' green
@@ -348,6 +379,17 @@ sudo apt-get -fqq install
 sudo apt-get -yqq autoremove
 sudo apt-get -yqq autoclean
 sudo apt-get -yqq clean
+
+cecho 'Installing Gimp...' magenta
+sudo apt-get install gimp -yqq
+cecho 'Installing Gimp CC Themes...' magenta
+git clone https://github.com/draekko/gimp-cc-themes ~/.gimp-2.8/themes
+
+cecho 'Installing Conky...' magenta
+sudo apt install conky -yqq
+
+cecho 'Installing CopyQ...' magenta
+sudo apt install copyq -yqq
 
 unity-tweak-tool &
 plank --preferences &
