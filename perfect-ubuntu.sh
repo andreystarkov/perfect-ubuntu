@@ -52,6 +52,7 @@ sudo add-apt-repository ppa:costales/unity-webapps-telegram -y
 sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y
 sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo add-apt-repository ppa:hluk/copyq -y
+sudo add-apt-repository ppa:webupd8team/java -y
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -100,6 +101,9 @@ sudo apt-get install libssl-dev automake -yqq
 sudo apt-get install python-dev -yqq
 sudo npm install -g flow-bin -yqq
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq
+sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils -yqq
+sudo apt-get install android-tools-adb -yqq
+sudo apt-get install gradle -yqq
 
 cecho 'Installing watchman...' magenta
 git clone https://github.com/facebook/watchman.git
@@ -151,8 +155,10 @@ cecho 'Installing Atom...' red
 sudo apt-get install atom -yqq
 apm install sync-settings
 
-cecho 'Install React/Native tools....' yellow
-sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq   
+cecho 'Install everything for React/Native....' yellow
+sudo apt-get install default-jre default-jdk -yqq
+sudo apt-get install oracle-java8-installer -yqq
+
 git clone https://github.com/facebook/watchman.git
 cd watchman
 git checkout v4.1.0  # the latest stable release
@@ -161,6 +167,8 @@ git checkout v4.1.0  # the latest stable release
 make
 sudo make install
 
+sudo apt-get install gradle -yqq
+touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 sudo npm install -g flow-bin
 sudo npm install -g create-react-native-app
 sudo npm install -g create-react-app
