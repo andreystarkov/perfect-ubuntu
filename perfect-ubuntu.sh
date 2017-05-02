@@ -53,6 +53,9 @@ sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y
 sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo add-apt-repository ppa:hluk/copyq -y
 sudo add-apt-repository ppa:webupd8team/java -y
+sudo add-apt-repository ppa:notepadqq-team/notepadqq -y
+sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme
+
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
@@ -187,21 +190,25 @@ wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
 
 figlet -c 'Look & Feel'
 
-cecho "Installing Papirus..." yellow
+cecho "Installing Gnome Themes..." yellow
+cecho "https://github.com/tliron/install-gnome-themes" white
+git clone https://github.com/tliron/install-gnome-themes ~/install-gnome-themes
+~/install-gnome-themes/install-gnome-themes
+
+cecho "Installing Papirus..." red
 cd ~
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install-papirus-home-gtk.sh | sh
 # sudo apt-get install papirus-gtk-icon-theme -y'
 
 # cecho "Installing Numix..." red
 # sudo apt-get install numix-* -yqq
-# cd /tmp
 
+cd /tmp
 cecho "Installing Plank themes..." magenta
 wget http://github.com/KenHarkey/plank-themes/archive/master.zip
 unzip master.zip
 cp -rf plank-themes-master/* ~/.local/share/plank/themes
 rm master.zip
-cd /tmp
 
 cecho "Installing OSX Arc White theme..." white
 wget http://github.com/LinxGem33/OSX-Arc-White/archive/master.zip ./
@@ -210,26 +217,28 @@ sudo cp -rf ./OSX-Arc-White-master /usr/local/share/themes
 rm ./master.zip
 cd ~/
 
-cecho "Installing Paper GTK Theme" cyan
-sudo apt-get install paper-gtk-theme -yqq
-sudo apt-get install paper-icon-theme -yqq
+# cecho "Installing Paper GTK Theme" cyan
+# sudo apt-get install paper-gtk-theme -yqq
+# sudo apt-get install paper-icon-theme -yqq
 
-cecho "Installing Arc Themes & Icons" red
-sudo apt-get install arc-* -yqq
+# cecho "Installing Arc Themes & Icons" red
+# sudo apt-get install arc-* -yqq
 
-cecho "Installing Vimix Theme" yellow
+cecho "Installing Vimix Theme..." yellow
 sudo apt-get install vimix-gtk-themes -yqq
 sudo apt-get install vimix-flat-themes -yqq
 
-# sudo apt-get install moka-icon-theme -y
+cecho 'Install Oranchelo Icon Theme...' cyan
+sudo apt-get install oranchelo-icon-theme -yqq
+
 mkdir -p ~/.icons
 cd /tmp
 
 # sudo apt-get install flatabulous-theme -y
-cecho 'Installing Flatabulous theme...' magenta
-wget http://github.com/anmoljagetia/Flatabulous/archive/master.zip ./
-unzip ./master.zip
-sudo cp -rf ./Flatabulous-master /usr/share/themes
+# cecho 'Installing Flatabulous theme...' magenta
+# wget http://github.com/anmoljagetia/Flatabulous/archive/master.zip ./
+# unzip ./master.zip
+# sudo cp -rf ./Flatabulous-master /usr/share/themes
 
 cecho 'Installing Flat Remix icon pack...' red
 git clone https://github.com/daniruiz/Flat-Remix /tmp/Flat-Remix
@@ -398,6 +407,8 @@ sudo apt install conky -yqq
 
 cecho 'Installing CopyQ...' magenta
 sudo apt install copyq -yqq
+
+sudo apt-get install notepadqq -yqq
 
 unity-tweak-tool &
 plank --preferences &
