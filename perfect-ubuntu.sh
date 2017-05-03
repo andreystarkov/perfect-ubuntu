@@ -36,6 +36,10 @@ sudo apt-get install figlet -yqq
 figlet -c 'Perfect Ubuntu'
 cecho 'Perfect enviroment for 16.04/16.10' magenta
 cecho 'https://github.com/andreystarkov/perfect-ubuntu' cyan
+
+cecho 'Removing wtf...' magenta
+sudo apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku -y
+sudo apt-get purge modemmanager -yqq
 cecho 'Adding repositories...' yellow
 
 #sudo add-apt-repository ppa:tualatrix/ppa -y
@@ -55,6 +59,7 @@ sudo add-apt-repository ppa:hluk/copyq -y
 sudo add-apt-repository ppa:webupd8team/java -y
 sudo add-apt-repository ppa:notepadqq-team/notepadqq -y
 sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme
+sudo add-apt-repository ppa:nilarimogard/webupd8
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -62,21 +67,26 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo dpkg --add-architecture amd64
 
 cecho 'Updating repositories...' yellow
-sudo apt-get update
+sudo apt-get update -qq
 cecho 'Upgrading...' cyan
-sudo apt-get upgrade
-sudo apt-get dist-upgrade -y
+sudo apt-get upgrade -qq
+#sudo apt-get dist-upgrade -qq
+
 cecho 'Installing preload...' yellow
 sudo apt-get install preload -yqq
 cecho 'Installing must-have tools...'
 sudo apt-get install plank -yqq
 sudo apt-get install gnome-tweak-tool -yqq
 sudo apt-get install unity-tweak-tool -yqq
-sudo apt-get install ubuntu-restricted-extras -yqq
-# sudo apt-get install libavcodec-extra -yqq
-sudo apt-get install synaptic gdebi -yqq
+sudo apt-get install ubuntu-restricted-extras software-properties-common -yqq
+sudo apt-get install libavcodec-extra -yqq
+sudo apt-get install synaptic gdebi mc -yqq
+cecho 'Installing Compizconfig...' white
+sudo apt-get install compizconfig-settings-manager -yqq
+sudo apt-get install compiz-plugins -yqq
+sudo apt-get install compiz-plugins-extra -yqq
 
-cp -rf ./Wallpapers ~/Pictures/Wallpapers
+# cp -rf ./Wallpapers ~/Pictures/Wallpapers
 
 #    ____                 _                                  _
 #   |  _ \  _____   _____| | ___  _ __  _ __ ___   ___ _ __ | |_
@@ -92,7 +102,7 @@ cecho 'Installing yarn...' cyan
 sudo apt-get install yarn -yqq
 
 cecho 'Installing git...' red
-sudo apt-get install git git-gui kdiff3 -yqq
+sudo apt-get install git git-gui kdiff3 git-core -yqq
 cecho 'Installing nodejs...' magenta
 sudo apt-get install build-essential -yqq
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -100,9 +110,12 @@ sudo apt-get install nodejs -yqq
 sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 cecho 'Installing required tools...' blue
+sudo apt-get install ruby rubygems ruby-dev -yqq
+sudo apt-get install autotools-dev -yqq
 sudo apt-get install libssl-dev automake -yqq
 sudo apt-get install python-dev -yqq
 sudo npm install -g flow-bin -yqq
+sudo apt install -y android-tools-adb android-tools-fastboot android-tools-fsutils gphoto2 jmtpfs mtpfs -yqq
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq
 sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils -yqq
 sudo apt-get install android-tools-adb -yqq
@@ -200,7 +213,7 @@ cd ~
 wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install-papirus-home-gtk.sh | sh
 # sudo apt-get install papirus-gtk-icon-theme -y'
 
-# cecho "Installing Numix..." red
+# cecho "Installing Numix..." redвфы
 # sudo apt-get install numix-* -yqq
 
 cd /tmp
@@ -257,10 +270,23 @@ cecho 'Installing fonts...' red
 cecho 'Installing Mac fonts...' cyan
 wget -O mac-fonts.zip http://drive.noobslab.com/data/Mac/macfonts.zip
 sudo unzip mac-fonts.zip -d /usr/share/fonts
-rm mac-fonts.zip
-sudo fc-cache -f -v
 
-# git clone https://github.com/supermarin/YosemiteSanFranciscoFont.git ~/Desktop
+cecho 'Installing San Francisco font...' cyan
+wget -O sf-fonts.zip https://github.com/AppleDesignResources/SanFranciscoFont/archive/master.zip
+sudo unzip sf-fonts.zip -d /usr/share/fonts
+
+cecho 'Installing Hack font...' blue
+git clone https://github.com/AppleDesignResources/SanFranciscoFont.git /tmp/sf
+sudo cp -rf /tmp/sf/)
+DEST_DIR=~/.fonts/hack_typeface
+mkdir -p $DEST_DIR
+
+which unzip >/dev/null || (echo "INFO: I need to install unzip"; sudo apt-get install unzip)
+wget --directory-prefix $DEST_DIR https://github.com/chrissimpkins/Hack/releases/download/v2.010/Hack-v2_010-otf.zip
+unzip $DEST_DIR/Hack-*.zip -d $DEST_DIR
+rm $DEST_DIR/Hack-*.zip
+
+sudo fc-cache -f -v
 
 # plank themes
 cecho 'Installing Plank themes...' magenta
@@ -297,6 +323,12 @@ cecho ".." magenta
 # swap tweak
 # sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
 
+org.gnome.desktop.wm.preferences titlebar-font 'SFNS Display Bold 11'
+org.gnome.desktop.interface font-name 'SFNS Display Regular 10,5'
+org.gnome.desktop.interface document-font-name 'SFNS Text MediumP4 11'
+org.gnome.desktop.interface monospace-font-name 'Hack Regular 12'
+
+org.gnome.desktop.privacy remember-recent-files false
 # echo 'Disabling packagekit...'
 # sudo systemctl status packagekit.service
 # sudo systemctl stop packagekit.service
@@ -329,10 +361,6 @@ sudo apt-get install gpick -yqq
 
 cecho 'Installing Inkscape...' blue
 sudo apt-get install inkscape -yqq
-
-cecho 'Installing Compizconfig...' white
-sudo apt-get install compizconfig-settings-manager -yqq
-sudo apt-get install compiz-plugins -yqq
 
 cecho 'Installing WineHQ...' yellow
 sudo dpkg --add-architecture i386
@@ -399,16 +427,26 @@ sudo apt-get -yqq clean
 
 cecho 'Installing Gimp...' magenta
 sudo apt-get install gimp -yqq
-cecho 'Installing Gimp CC Themes...' magenta
+cecho 'Installing Gimp CC Themes...' yellow
 git clone https://github.com/draekko/gimp-cc-themes ~/.gimp-2.8/themes
 
 cecho 'Installing Conky...' magenta
 sudo apt install conky -yqq
 
-cecho 'Installing CopyQ...' magenta
+cecho 'Installing CopyQ...' red
 sudo apt install copyq -yqq
 
+cecho 'Installing Notepad++...' blue
 sudo apt-get install notepadqq -yqq
+
+cecho 'Installing Albert...' magenta
+sudo apt-get install albert -yqq
+
+cecho 'Installing Chrome...' yellow
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+sudo apt-get update -qq
+sudo apt -y install google-chrome-stable -yqq
 
 unity-tweak-tool &
 plank --preferences &

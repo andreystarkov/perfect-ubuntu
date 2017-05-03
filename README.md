@@ -1,26 +1,22 @@
-# Perfect Ubuntu
+# Perfect Open Source Dev Environment
 
-## On the way to perfect open source dev enviroment.
+Most awesome hand-picked tools, apps, themes & tweaks.
 
-### post install script for ubuntu 16.04/16.10
+<img src="img/panel.gif" style='float:left'/>
+<img src="img/plank.gif" />
+<img src="img/themes.gif" style='float:left'/>
+<img src="img/icons.gif" />
 
-<a href="screen.png" target="blank"><img src='screen.png' /></a>
+Includes everything you need to start JS development right now and get pleasure during the process.
+My Atom <a href="https://gist.github.com/andreystarkov/30d50ef6de9f37737618ab0c40267c38">sync-settings</a> config stores <a href="https://gist.github.com/andreystarkov/30d50ef6de9f37737618ab0c40267c38">here</a>.
 
-<a href="screen.png1" target="blank"><img src='screen1.png' /></a>
-
-Most awesome hand-picked apps, themes & tweaks.
-
-Tested on 16.10/16.04.
+<i>Tested on 16.10/16.04. Updated on 17.04 and its fine!</i>
 
 #### Usage:
 
-```
+```bash
   git clone https://github.com/andreystarkov/perfect-ubuntu
   cd ~/perfect-ubuntu
   chmod +x perfect-ubuntu.sh
   ./perfect-ubuntu.sh
 ```
-
-## TODO
-
-Set theme/icons & other core things. Option select menu.
