@@ -58,8 +58,8 @@ sudo add-apt-repository ppa:gerardpuig/ppa -y
 sudo add-apt-repository ppa:hluk/copyq -y
 sudo add-apt-repository ppa:webupd8team/java -y
 sudo add-apt-repository ppa:notepadqq-team/notepadqq -y
-sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme
-sudo add-apt-repository ppa:nilarimogard/webupd8
+sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme -y
+sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -372,11 +372,13 @@ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 cecho 'Installing Bleachbit...' cyan
 sudo apt-get install bleachbit -yqq
 
-sudo apt-get -yqq install y-ppa-manager
+#sudo apt-get -yqq install y-ppa-manager
+
+cecho 'Installing Steam...' blue
 sudo apt-get install steam -yqq
-# echo 'Installing alternative launchers (albert, slingscold)...'
-# sudo apt-get install albert slingscold -yqq
-# sudo apt-get install libertine libertine-scope libertine-tools -yqq
+
+cecho 'Installing Albert...' red
+sudo apt-get install albert -yqq
 
 cecho 'Graphic tools installing...' cyan
 # useful graphics editing apps
