@@ -300,7 +300,6 @@ rm $DEST_DIR/Hack-*.zip
 
 sudo fc-cache -f -v
 
-# plank themes
 cecho 'Installing Plank themes...' magenta
 sudo apt-get install plank -yqq
 git clone https://github.com/KenHarkey/plank-themes ~/plank-themes
@@ -308,6 +307,9 @@ cd ~/plank-themes
 bash ./install.sh
 cd ~ && mkdir -p ~/.temp-plank-themer && cd ~/.temp-plank-themer && wget https://github.com/rhoconlinux/plank-themer/archive/master.zip && unzip master.zip && cd plank-themer-master/ && rm -fR ~/.config/plank/dock1/theme_index; rm -fR ~/.config/plank/dock1/themes-repo; cp -a theme_index/ ~/.config/plank/dock1 && cp -a themes-repo/ ~/.config/plank/dock1 && cd ~ && rm -R ~/.temp-plank-themer && sh ~/.config/plank/dock1/theme_index/plank-on-dock-themer.sh
 
+cecho 'Installing backgrounds....' cyan
+sudo git clone https://github.com/andreystarkov/perfect-wallpapers /tmp/wallpapers
+sudo mv -f /tmp/wallpapers/* /usr/share/backgrounds
 
 #   ____            _                   _                      _
 #  / ___| _   _ ___| |_ ___ _ __ ___   | |___      _____  __ _| | _____
