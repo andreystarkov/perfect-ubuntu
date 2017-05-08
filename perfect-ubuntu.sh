@@ -187,10 +187,10 @@ apm install advanced-open-file copy-paste duplicate-line-or-selection
 apm install sort-lines sorter css-declaration-sorter scroll-through-time
 apm install linter intentions busy-signal linter-ui-default linter-js-standard standard-formatter linter-csslint linter-eslint linter-write-good atom-beautify linter-scss-lint linter-markdown
 apm install markdown-preview-plus
-apm install auto-update-packages
+# apm install auto-update-packages
 
 cecho 'Install Atom themes....' cyan
-apm install gruvbox-plus-syntax hybrid-next-syntax atom-dark-syntax atom-material-syntax-dark slime nebula-ui nucleus-dark-ui accents-ui one-dark-vivid-syntax atom-panda-syntax predawn-ui seti-ui-red flexible-ui seti-classic
+apm install gruvbox-plus-syntax hybrid-next-syntax atom-dark-syntax atom-material-syntax-dark slime nebula-ui nucleus-dark-ui accents-ui one-dark-vivid-syntax atom-panda-syntax predawn-ui seti-ui-red flexible-ui seti-classic isotope-ui dark-flat-ui outlander-ui next-dark-ui
 
 cecho 'Install everything for React/Native....' yellow
 
