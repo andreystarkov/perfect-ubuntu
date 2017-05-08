@@ -171,7 +171,26 @@ git config --global credential.helper cache
 
 cecho 'Installing Atom...' red
 sudo apt-get install atom -yqq
+
+cecho 'Install Atom plugins....' yellow
 apm install sync-settings
+apm install nuclide react atom-ternjs
+apm install react-es6-snippets react-native-snippets react-redux-snippets
+apm install color-picker file-icons minimap pigments docblockr
+apm install remote-edit editorconfig set-syntax synced-sidebar
+apm install project-plus custom-title project-manager
+apm install todo-show imdone-atom
+apm install autocomplete-modules autoclose-html
+apm install highlight-selected highlight-line simple-drag-drop-text minimap-highlight-selected
+apm install git-plus git-time-machine git-projects merge-conflicts
+apm install advanced-open-file copy-paste duplicate-line-or-selection
+apm install sort-lines sorter css-declaration-sorter scroll-through-time
+apm install linter intentions busy-signal linter-ui-default linter-js-standard standard-formatter linter-csslint linter-eslint linter-write-good atom-beautify linter-scss-lint linter-markdown
+apm install markdown-preview-plus
+apm install auto-update-packages
+
+cecho 'Install Atom themes....' cyan
+apm install gruvbox-plus-syntax hybrid-next-syntax atom-dark-syntax atom-material-syntax-dark slime nebula-ui nucleus-dark-ui accents-ui one-dark-vivid-syntax atom-panda-syntax predawn-ui seti-ui-red flexible-ui seti-classic
 
 cecho 'Install everything for React/Native....' yellow
 
