@@ -32,14 +32,19 @@ function cecho(){
 
 cecho 'Preparing...' cyan
 sudo apt-get install figlet -yqq
+sudo apt-get install wget curl -yqq
+cecho 'Installing git...' red
+sudo apt-get install git kdiff3 git-core -yqq
 
 figlet -c 'Perfect Ubuntu'
 cecho 'Perfect enviroment for 16.04/16.10' magenta
 cecho 'https://github.com/andreystarkov/perfect-ubuntu' cyan
 
-cecho 'Removing wtf...' magenta
+cecho 'Removing pre-installed wtf...' magenta
 sudo apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku -y
 sudo apt-get purge modemmanager -yqq
+sudo apt-get purge apt-xapian-index
+
 cecho 'Adding repositories...' yellow
 
 #sudo add-apt-repository ppa:tualatrix/ppa -y
@@ -60,6 +65,11 @@ sudo add-apt-repository ppa:webupd8team/java -y
 sudo add-apt-repository ppa:notepadqq-team/notepadqq -y
 sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme -y
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+sudo add-apt-repository ppa:webupd8team/tor-browser -y
+sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+
+curl ftp://ftp.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
+echo "deb ftp://ftp.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sources.list.d/libdvdcss.list
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -74,13 +84,16 @@ sudo apt-get upgrade -qq
 
 cecho 'Installing preload...' yellow
 sudo apt-get install preload -yqq
-cecho 'Installing must-have tools...'
+
+cecho 'Installing core apps, codecs ant utils...'
 sudo apt-get install plank -yqq
 sudo apt-get install gnome-tweak-tool -yqq
 sudo apt-get install unity-tweak-tool -yqq
 sudo apt-get install ubuntu-restricted-extras software-properties-common -yqq
 sudo apt-get install libavcodec-extra -yqq
+sudo apt-get install libdvdcss2 libdvdnav4 libdvdread4 -yqq
 sudo apt-get install synaptic gdebi mc -yqq
+
 cecho 'Installing Compizconfig...' white
 sudo apt-get install compizconfig-settings-manager -yqq
 sudo apt-get install compiz-plugins -yqq
@@ -96,13 +109,9 @@ sudo apt-get install compiz-plugins-extra -yqq
 
 figlet -c 'Development'
 
-figlet -f small -c '31337/true'
-
 cecho 'Installing yarn...' cyan
 sudo apt-get install yarn -yqq
 
-cecho 'Installing git...' red
-sudo apt-get install git git-gui kdiff3 git-core -yqq
 cecho 'Installing nodejs...' magenta
 sudo apt-get install build-essential -yqq
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -111,6 +120,7 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 cecho 'Installing required tools...' blue
 sudo apt-get install ruby rubygems ruby-dev -yqq
+sudo apt-get install git-gui -yqq
 sudo apt-get install autotools-dev -yqq
 sudo apt-get install libssl-dev automake -yqq
 sudo apt-get install python-dev -yqq
@@ -120,16 +130,7 @@ sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-
 sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils -yqq
 sudo apt-get install android-tools-adb -yqq
 sudo apt-get install gradle -yqq
-
-cecho 'Installing watchman...' magenta
-git clone https://github.com/facebook/watchman.git
-cd watchman
-git checkout v4.1.0
-./autogen.sh
-./configure
-make
-sudo make install
-cd ~
+sudo apt-get install ubuntu-make -yqq
 
 # cecho 'Installing React Native CLI...' red
 # curl -0 -L https://npmjs.org/install.sh | sudo sh.
@@ -172,16 +173,24 @@ sudo apt-get install atom -yqq
 apm install sync-settings
 
 cecho 'Install everything for React/Native....' yellow
+
+cecho 'Install Java....' blue
 sudo apt-get install default-jre default-jdk -yqq
 sudo apt-get install oracle-java8-installer -yqq
+sudo apt-get install oracle-java8-set-default -yqq
 
+cecho 'Install Android Studio....' green
+sudo apt install android-studio -yqq
+
+cecho 'Installing watchman...' magenta
 git clone https://github.com/facebook/watchman.git
 cd watchman
-git checkout v4.1.0  # the latest stable release
+git checkout v4.1.0
 ./autogen.sh
 ./configure
 make
 sudo make install
+cd ~
 
 sudo apt-get install gradle -yqq
 touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
@@ -191,8 +200,10 @@ sudo npm install -g create-react-app
 sudo npm install -g npm-check-updates
 sudo npm install -g react-native-cli
 sudo npm install -g ignite-cli
+sudo npm install -g reactotron-cli
+sudo npm install -g reactotron
 
-wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
+# wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
 
 #   _                _       ___      __           _
 #  | |    ___   ___ | | __  ( _ )    / _| ___  ___| |
@@ -354,13 +365,15 @@ sudo apt-get install google-chrome-stable -yqq
 cecho 'Installing Firefox...' red
 sudo apt-get install firefox -yqq
 
-cecho 'Installing core apps...' magenta
-sudo apt-get install indicator-multiload virtualbox virtualbox-guest-additions-iso -yqq
-sudo apt-get install vlc shutter deluge -yqq
-sudo apt-get install gpick -yqq
+cecho 'Installing Tor Browser...' red
+sudo apt-get install tor-browser -yqq
 
-cecho 'Installing Inkscape...' blue
-sudo apt-get install inkscape -yqq
+cecho 'Installing Virtualbox...' magenta
+sudo apt-get install virtualbox virtualbox-guest-additions-iso -yqq
+
+sudo apt-get install vlc vlc-data browser-plugin-vlc mplayer2 -yqq
+sudo apt-get install vlc-plugin-* -yqq
+
 
 cecho 'Installing WineHQ...' yellow
 sudo dpkg --add-architecture i386
@@ -380,52 +393,34 @@ sudo apt-get install steam -yqq
 cecho 'Installing Albert...' red
 sudo apt-get install albert -yqq
 
-cecho 'Graphic tools installing...' cyan
+
 # useful graphics editing apps
 # sudo apt-get install darktable -y
 # sudo apt-get install rawtherapee -y
+# sudo apt-get install aptik -yqq
 
+cecho 'Installing Mypaint...' cyan
 sudo apt-get install mypaint -yqq
 
-# sudo apt-get install aptik -yqq
+cecho 'Installing Inkscape...' blue
+sudo apt-get install inkscape -yqq
 
 cecho 'Installing Geary mail client...' red
 sudo apt-get install geary -yqq
-
-# echo 'Installing recordmydesktop...'
-# sudo apt-get install gtk-recordmydesktop -yqq
 
 sudo apt-get install simplescreenrecorder -yqq
 
 cecho 'Installing Peek...' yellow
 sudo apt-get install peek -yqq
 
-sudo apt-get purge apt-xapian-index
-
 cecho 'Installing Ubuntu Cleaner...' cyan
 sudo apt-get install ubuntu-cleaner -yq
-
-# login screen. looks perfect but dangerous (not tested)
-
-# cecho 'Installing custom login screen...' yellow
-# sudo add-apt-repository ppa:noobslab/themes -y
-# sudo apt-get update
-# sudo apt-get install mbuntu-y-lightdm-v4 -yq
-
-#sudo add-apt-repository ppa:agornostal/ulauncher -y
-#sudo apt-get update
-#sudo apt-get install ulauncher
 
 cecho 'Installing Telegram...' yellow
 sudo apt-get install unity-webapps-telegram -yqq
 
 cecho 'Installing Green Recorder...' green
 sudo apt-get install green-recorder -yqq
-
-sudo apt-get -fqq install
-sudo apt-get -yqq autoremove
-sudo apt-get -yqq autoclean
-sudo apt-get -yqq clean
 
 cecho 'Installing Gimp...' magenta
 sudo apt-get install gimp -yqq
@@ -441,7 +436,7 @@ sudo apt install copyq -yqq
 cecho 'Installing Notepad++...' blue
 sudo apt-get install notepadqq -yqq
 
-cecho 'Installing Albert...' magenta
+cecho 'Installing Albert Launcher...' magenta
 sudo apt-get install albert -yqq
 
 cecho 'Installing Chrome...' yellow
@@ -449,6 +444,20 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 sudo apt-get update -qq
 sudo apt -y install google-chrome-stable -yqq
+
+cecho 'Installing indicators...' red
+sudo apt-get install indicator-multiload -yqq
+
+
+cecho 'Installing tools (torrents, screenshots, utils, etc...)'
+sudo apt-get install shutter -yqq
+sudo apt-get install deluge -yqq
+sudo apt-get install gpick -yqq
+
+sudo apt-get -fqq install
+sudo apt-get -yqq autoremove
+sudo apt-get -yqq autoclean
+sudo apt-get -yqq clean
 
 unity-tweak-tool &
 plank --preferences &
