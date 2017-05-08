@@ -3,9 +3,9 @@
 # https://github.com/andreystarkov/perfect-ubuntu
 # in progress.
 
-# Passed fine on 16.10
+# Passed fine on 16.04/16.10
 
-HOME_ROOT="/home/deo"
+HOME_ROOT="~/"
 GIT_NAME="andreystarkov"
 GIT_EMAIL="im@andreystarkov.ru"
 OUT=" >> ~/Desktop/perfect.log 2>&1"
@@ -74,6 +74,9 @@ echo "deb ftp://ftp.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sourc
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
 sudo dpkg --add-architecture amd64
 
 cecho 'Updating repositories...' yellow
@@ -93,8 +96,6 @@ sudo apt-get install ubuntu-restricted-extras software-properties-common -yqq
 sudo apt-get install libavcodec-extra -yqq
 sudo apt-get install libdvdcss2 libdvdnav4 libdvdread4 -yqq
 sudo apt-get install synaptic gdebi mc -yqq
-
-cecho 'Installing Compizconfig...' white
 sudo apt-get install compizconfig-settings-manager -yqq
 sudo apt-get install compiz-plugins -yqq
 sudo apt-get install compiz-plugins-extra -yqq
@@ -125,7 +126,7 @@ sudo apt-get install autotools-dev -yqq
 sudo apt-get install libssl-dev automake -yqq
 sudo apt-get install python-dev -yqq
 sudo npm install -g flow-bin -yqq
-sudo apt install -y android-tools-adb android-tools-fastboot android-tools-fsutils gphoto2 jmtpfs mtpfs -yqq
+sudo apt-get install -y android-tools-adb android-tools-fastboot android-tools-fsutils gphoto2 jmtpfs mtpfs -yqq
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -yqq
 sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils -yqq
 sudo apt-get install android-tools-adb -yqq
@@ -346,6 +347,15 @@ org.gnome.desktop.privacy remember-recent-files false
 # sudo systemctl disable packagekit.service
 # sudo systemctl status packagekit.service
 
+# Autorun on startup
+#
+# /etc/init.d/perfect-startup
+# echo "plank > /dev/null 2>&1 &" >> /etc/init.d/perfect-startup
+# echo "guake > /dev/null 2>&1 &" >> /etc/init.d/perfect-startup
+# echo "albert > /dev/null 2>&1 &" >> /etc/init.d/perfect-startup
+# sudo chmod +x /etc/init.d/perfect-startup
+# sudo update-rc.d perfect-startup defaults
+
 #      _                       ___     _              _
 #     / \   _ __  _ __  ___   ( _ )   | |_ ___   ___ | |___
 #    / _ \ | '_ \| '_ \/ __|  / _ \/\ | __/ _ \ / _ \| / __|
@@ -371,11 +381,11 @@ sudo apt-get install tor-browser -yqq
 cecho 'Installing Virtualbox...' magenta
 sudo apt-get install virtualbox virtualbox-guest-additions-iso -yqq
 
+cecho 'Installing VLC...' yellow
 sudo apt-get install vlc vlc-data browser-plugin-vlc mplayer2 -yqq
 sudo apt-get install vlc-plugin-* -yqq
 
-
-cecho 'Installing WineHQ...' yellow
+cecho 'Installing WineHQ...' red
 sudo dpkg --add-architecture i386
 sudo apt-get install --install-recommends winehq-devel -yqq
 
@@ -392,7 +402,6 @@ sudo apt-get install steam -yqq
 
 cecho 'Installing Albert...' red
 sudo apt-get install albert -yqq
-
 
 # useful graphics editing apps
 # sudo apt-get install darktable -y
@@ -440,14 +449,10 @@ cecho 'Installing Albert Launcher...' magenta
 sudo apt-get install albert -yqq
 
 cecho 'Installing Chrome...' yellow
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-sudo apt-get update -qq
 sudo apt -y install google-chrome-stable -yqq
 
 cecho 'Installing indicators...' red
 sudo apt-get install indicator-multiload -yqq
-
 
 cecho 'Installing tools (torrents, screenshots, utils, etc...)'
 sudo apt-get install shutter -yqq
@@ -459,5 +464,5 @@ sudo apt-get -yqq autoremove
 sudo apt-get -yqq autoclean
 sudo apt-get -yqq clean
 
-unity-tweak-tool &
-plank --preferences &
+unity-tweak-tool > /dev/null 2>&1 &
+plank --preferences > /dev/null 2>&1 &
