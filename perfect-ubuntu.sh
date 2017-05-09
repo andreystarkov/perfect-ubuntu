@@ -17,12 +17,12 @@ function cecho(){
        case $(echo $color | tr '[:upper:]' '[:lower:]') in
         black) color=0 ;;
         red) color=1 ;;
-        green) color=2 ;;
+        green) color=2 ;;7
         yellow) color=3 ;;
         blue) color=4 ;;
         magenta) color=5 ;;
         cyan) color=6 ;;
-        white|*) color=7 ;; # white or invalid color
+        white|*) color=7 ;;
        esac
     fi
     tput setaf $color;
@@ -67,6 +67,8 @@ sudo add-apt-repository ppa:oranchelo/oranchelo-icon-theme -y
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 sudo add-apt-repository ppa:webupd8team/tor-browser -y
 sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+sudo add-apt-repository ppa:kasra-mp/ubuntu-indicator-weather -y
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
 
 curl ftp://ftp.videolan.org/pub/debian/videolan-apt.asc | sudo apt-key add -
 echo "deb ftp://ftp.videolan.org/pub/debian/stable ./" | sudo tee /etc/apt/sources.list.d/libdvdcss.list
@@ -89,6 +91,7 @@ cecho 'Installing preload...' yellow
 sudo apt-get install preload -yqq
 
 cecho 'Installing core apps, codecs ant utils...'
+sudo apt-get install gksu -yqq
 sudo apt-get install plank -yqq
 sudo apt-get install gnome-tweak-tool -yqq
 sudo apt-get install unity-tweak-tool -yqq
@@ -99,8 +102,6 @@ sudo apt-get install synaptic gdebi mc -yqq
 sudo apt-get install compizconfig-settings-manager -yqq
 sudo apt-get install compiz-plugins -yqq
 sudo apt-get install compiz-plugins-extra -yqq
-
-# cp -rf ./Wallpapers ~/Pictures/Wallpapers
 
 #    ____                 _                                  _
 #   |  _ \  _____   _____| | ___  _ __  _ __ ___   ___ _ __ | |_
@@ -169,28 +170,44 @@ git config --global merge.tool kdiff3
 git config --global mergetool.keepBackup false
 git config --global credential.helper cache
 
-cecho 'Installing Atom...' red
+cecho 'Installing Atom...' yellow
 sudo apt-get install atom -yqq
 
-cecho 'Install Atom plugins....' yellow
+cecho 'Installing sync-settings...' blue
 apm install sync-settings
+cecho '.' black
+cecho 'My atom ES6/React/Native IDE setup:' magenta
+cecho 'https://gist.github.com/andreystarkov/8839ca26a3bb21243455b8b92386937a' cyan
+cecho '.' black
+cecho 'Install Atom plugins....' red
 apm install nuclide react atom-ternjs
 apm install react-es6-snippets react-native-snippets react-redux-snippets
-apm install color-picker file-icons minimap pigments docblockr
-apm install remote-edit editorconfig set-syntax synced-sidebar
+apm install color-picker seti-icons minimap pigments docblockr
+apm install editorconfig set-syntax synced-sidebar
+apm install autocomplete-modules
+apm install highlight-selected highlight-line text minimap-highlight-selected
+apm install duplicate-line-or-selection
+apm install css-declaration-sorter
+apm install intentions busy-signal
+apm install atom-beautify
+apm install linter linter-ui-default linter-js-standard standard-formatter
+apm install linter-eslint
+apm install linter-write-good
+apm install linter-csslint linter-scss-lint
+apm install linter-markdown markdown-preview-plus
 apm install project-plus custom-title project-manager
-apm install todo-show imdone-atom
-apm install autocomplete-modules autoclose-html
-apm install highlight-selected highlight-line simple-drag-drop-text minimap-highlight-selected
-apm install git-plus git-time-machine git-projects merge-conflicts
-apm install advanced-open-file copy-paste duplicate-line-or-selection
-apm install sort-lines sorter css-declaration-sorter scroll-through-time
-apm install linter intentions busy-signal linter-ui-default linter-js-standard standard-formatter linter-csslint linter-eslint linter-write-good atom-beautify linter-scss-lint linter-markdown
-apm install markdown-preview-plus
-# apm install auto-update-packages
+apm install git-plus git-time-machine git-projects merge-conflicts scroll-through-time
+
+# More useful plugins:
+# apm install todo-show imdone-atom autoclose-html
+# apm install simple-drag-drop-remote-edit
+# apm install advanced-open-file copy-paste sort-lines sorter
 
 cecho 'Install Atom themes....' cyan
-apm install gruvbox-plus-syntax hybrid-next-syntax atom-dark-syntax atom-material-syntax-dark slime nebula-ui nucleus-dark-ui accents-ui one-dark-vivid-syntax atom-panda-syntax predawn-ui seti-ui-red flexible-ui seti-classic isotope-ui dark-flat-ui outlander-ui next-dark-ui
+apm install nucleus-dark-ui atom-panda-syntax atom-material-syntax-dark
+
+# apm install hybrid-next-syntax ariake-dark-syntax one-dark-vivid-syntax nebula-ui predawn-ui seti-ui-red flexible-ui
+# apm install seti-classic isotope-ui dark-flat-ui outlander-ui next-dark-ui
 
 cecho 'Install everything for React/Native....' yellow
 
@@ -377,6 +394,10 @@ org.gnome.desktop.privacy remember-recent-files false
 # sudo chmod +x /etc/init.d/perfect-startup
 # sudo update-rc.d perfect-startup defaults
 
+# Disable guest session (not tested)
+# sudo touch /etc/lightdm/lightdm.conf.d/50-no-guest.conf
+# sudo echo "[SeatDefaults] allow-guest=false" > /etc/lightdm/lightdm.conf.d/50-no-guest.conf
+
 #      _                       ___     _              _
 #     / \   _ __  _ __  ___   ( _ )   | |_ ___   ___ | |___
 #    / _ \ | '_ \| '_ \/ __|  / _ \/\ | __/ _ \ / _ \| / __|
@@ -474,16 +495,28 @@ sudo apt -y install google-chrome-stable -yqq
 
 cecho 'Installing indicators...' red
 sudo apt-get install indicator-multiload -yqq
+sudo apt-get install indicator-weather -yqq
 
-cecho 'Installing tools (torrents, screenshots, utils, etc...)'
+cecho 'Installing tools (torrents, screenshots, utils, etc...)' magenta
 sudo apt-get install shutter -yqq
 sudo apt-get install deluge -yqq
 sudo apt-get install gpick -yqq
+sudo apt-get install grub-customizer -yqq
+sudo apt-get install lightdm-gtk-greeter-settings
 
+cecho 'Cleaning...' yellow
 sudo apt-get -fqq install
 sudo apt-get -yqq autoremove
 sudo apt-get -yqq autoclean
 sudo apt-get -yqq clean
+
+figlet 'Weehha'
+cecho '.' black
+cecho 'You did it. Configure and enjoy!' yellow
+cecho '.' black
+cecho 'If something went wrong create an issue here:' magenta
+cecho 'https://github.com/andreystarkov/perfect-ubuntu' cyan
+cecho '.' black
 
 unity-tweak-tool > /dev/null 2>&1 &
 plank --preferences > /dev/null 2>&1 &
