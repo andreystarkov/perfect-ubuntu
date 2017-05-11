@@ -239,7 +239,7 @@ sudo npm install -g react-native-cli
 sudo npm install -g ignite-cli
 sudo npm install -g reactotron-cli
 sudo npm install -g reactotron
-
+sudo npm install -g rnpm 
 # wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
 
 #   _                _       ___      __           _
