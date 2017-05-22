@@ -5,7 +5,7 @@
 
 # Passed fine on 16.04/16.10
 
-HOME_ROOT="~/"
+HOME_ROOT="/home/deo"
 GIT_NAME="andreystarkov"
 GIT_EMAIL="im@andreystarkov.ru"
 OUT=" >> ~/Desktop/perfect.log 2>&1"
@@ -17,7 +17,7 @@ function cecho(){
        case $(echo $color | tr '[:upper:]' '[:lower:]') in
         black) color=0 ;;
         red) color=1 ;;
-        green) color=2 ;;7
+        green) color=2 ;;
         yellow) color=3 ;;
         blue) color=4 ;;
         magenta) color=5 ;;
@@ -53,7 +53,7 @@ sudo add-apt-repository ppa:dhor/myway -y
 sudo add-apt-repository ppa:pmjdebruijn/darktable-unstable -y
 sudo add-apt-repository ppa:noobslab/themes -y
 sudo add-apt-repository ppa:noobslab/macbuntu -y
-sudo add-apt-repository ppa:wine/wine-builds
+sudo add-apt-repository ppa:wine/wine-builds -y
 sudo add-apt-repository ppa:teejee2008/ppa -y
 sudo add-apt-repository ppa:geary-team/releases -y
 sudo add-apt-repository ppa:mhsabbagh/greenproject -y
@@ -141,7 +141,7 @@ sudo apt-get install ubuntu-make -yqq
 # sudo apt-get install android-studio -yqq
 
 cecho 'Installing nvm...' yellow
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 sudo npm install -g node
 nvm install node
 cecho 'Installing zsh...' red
@@ -203,7 +203,7 @@ apm install git-plus git-time-machine git-projects merge-conflicts scroll-throug
 # apm install simple-drag-drop-remote-edit
 # apm install advanced-open-file copy-paste sort-lines sorter
 
-cecho 'Install Atom themes....' cyan
+# cecho 'Install Atom themes....' cyan
 apm install nucleus-dark-ui atom-panda-syntax atom-material-syntax-dark
 
 # apm install hybrid-next-syntax ariake-dark-syntax one-dark-vivid-syntax nebula-ui predawn-ui seti-ui-red flexible-ui
@@ -230,6 +230,7 @@ sudo make install
 cd ~
 
 sudo apt-get install gradle -yqq
+mkdir ~/.gradle
 touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 sudo npm install -g flow-bin
 sudo npm install -g create-react-native-app
