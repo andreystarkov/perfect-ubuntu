@@ -240,7 +240,7 @@ sudo npm install -g react-native-cli
 sudo npm install -g ignite-cli
 sudo npm install -g reactotron-cli
 sudo npm install -g reactotron
-sudo npm install -g rnpm 
+sudo npm install -g rnpm
 # wget https://release.gitkraken.com/linux/gitkraken-amd64.deb ~/Desktop
 
 #   _                _       ___      __           _
@@ -290,8 +290,8 @@ cecho "Installing Vimix Theme..." yellow
 sudo apt-get install vimix-gtk-themes -yqq
 sudo apt-get install vimix-flat-themes -yqq
 
-cecho 'Install Oranchelo Icon Theme...' cyan
-sudo apt-get install oranchelo-icon-theme -yqq
+# cecho 'Install Oranchelo Icon Theme...' cyan
+# sudo apt-get install oranchelo-icon-theme -yqq
 
 mkdir -p ~/.icons
 cd /tmp
@@ -326,7 +326,7 @@ sudo unzip sf-fonts.zip -d /usr/share/fonts
 
 cecho 'Installing Hack font...' blue
 git clone https://github.com/AppleDesignResources/SanFranciscoFont.git /tmp/sf
-sudo cp -rf /tmp/sf/)
+sudo cp -rf /tmp/sf/
 DEST_DIR=~/.fonts/hack_typeface
 mkdir -p $DEST_DIR
 
@@ -359,10 +359,10 @@ figlet -c 'system tweaks'
 
 cecho "." yellow
 # sudo sh -c "echo 'allow-guest=false' >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
-dconf write /org/compiz/profiles/unity/plugins/unityshell/icon-size 28
-gsettings set com.canonical.Unity.Launcher launcher-position Left
-gconftool-2 --type int --set "/apps/compiz-1/plugins/unityshell/screen0/options/launcher_hide_mode" 1
+# gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+# dconf write /org/compiz/profiles/unity/plugins/unityshell/icon-size 28
+# gsettings set com.canonical.Unity.Launcher launcher-position Left
+# gconftool-2 --type int --set "/apps/compiz-1/plugins/unityshell/screen0/options/launcher_hide_mode" 1
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 # gsettings set org.gnome.desktop.interface gtk-theme 'Vimixdark'
 # gsettings set org.gnome.desktop.wm.preferences theme "Vimixdark"
@@ -374,12 +374,12 @@ cecho ".." magenta
 # swap tweak
 # sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
 
-org.gnome.desktop.wm.preferences titlebar-font 'SFNS Display Bold 11'
-org.gnome.desktop.interface font-name 'SFNS Display Regular 10,5'
-org.gnome.desktop.interface document-font-name 'SFNS Text MediumP4 11'
-org.gnome.desktop.interface monospace-font-name 'Hack Regular 12'
-
-org.gnome.desktop.privacy remember-recent-files false
+# org.gnome.desktop.wm.preferences titlebar-font 'SFNS Display Bold 11'
+# org.gnome.desktop.interface font-name 'SFNS Display Regular 10,5'
+# org.gnome.desktop.interface document-font-name 'SFNS Text MediumP4 11'
+# org.gnome.desktop.interface monospace-font-name 'Hack Regular 12'
+#
+# org.gnome.desktop.privacy remember-recent-files false
 # echo 'Disabling packagekit...'
 # sudo systemctl status packagekit.service
 # sudo systemctl stop packagekit.service
@@ -503,7 +503,6 @@ sudo apt-get install shutter -yqq
 sudo apt-get install deluge -yqq
 sudo apt-get install gpick -yqq
 sudo apt-get install grub-customizer -yqq
-sudo apt-get install lightdm-gtk-greeter-settings
 
 cecho 'Cleaning...' yellow
 sudo apt-get -fqq install
