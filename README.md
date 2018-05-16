@@ -11,7 +11,7 @@ Ubuntu 16.04/18.04 Post install scripts.
 
 ### Usage:
 
-```bash
+```shell
   git clone https://github.com/andreystarkov/perfect-ubuntu
   cd ~/perfect-ubuntu
   chmod +x perfect-ubuntu.sh
