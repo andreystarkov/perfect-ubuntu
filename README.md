@@ -1,17 +1,13 @@
-# Perfect Open Source Dev Environment
+# Perfect Open Source Javascript Development Enviroment
 
-Most awesome hand-picked tools, apps, themes & tweaks.
+Just-add-water. Best tools. Looking fine 
 
 | ![](img/zsh.gif) | ![](img/albert.gif) |
 | :---         |    ---:      |
 | ![](img/plank.gif) | ![](img/panel.gif) |
 | ![](img/themes.gif) | ![](img/icons.gif)  |
 
-Includes everything you need to start JS development right now and get pleasure during the process.
-
-My Atom <a href="https://gist.github.com/andreystarkov/30d50ef6de9f37737618ab0c40267c38">sync-settings</a> config stores <a href="https://gist.github.com/andreystarkov/f6ba487f9432026f82fc613138884cb2">here</a>.
-
-<i>Tested on 16.10/16.04. Updated on 17.04 and its fine!</i>
+Ubuntu 16.04/18.04 Post install scripts.
 
 ### Usage:
 
@@ -19,10 +15,7 @@ My Atom <a href="https://gist.github.com/andreystarkov/30d50ef6de9f37737618ab0c4
   git clone https://github.com/andreystarkov/perfect-ubuntu
   cd ~/perfect-ubuntu
   chmod +x perfect-ubuntu.sh
-  ./perfect-ubuntu.sh
+  ./perfect-16.04.sh
+  # or
+  ./perfect-18.04.sh
 ```
-
-#### TODO:
-
-- Auto set theme (doesn't work now)
-- Auto set other tweaks & settings

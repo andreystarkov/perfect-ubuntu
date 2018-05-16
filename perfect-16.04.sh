@@ -1,9 +1,10 @@
-#!/bin/bash
-# Perfect ubuntu
-# https://github.com/andreystarkov/perfect-ubuntu
-# in progress.
+/* 
+   Post-install script for Ubuntu 16.04.
+   Just-add-water, Looking fine Javascript Development Enviroment
 
-# Passed fine on 16.04/16.10
+   https://github.com/andreystarkov/perfect-ubuntu
+*/
+
 
 HOME_ROOT="/home/deo"
 GIT_NAME="andreystarkov"
