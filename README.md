@@ -1,6 +1,6 @@
-### Perfect Open Source Javascript Development Enviroment
+### Perfect Ubuntu
 
-Just-add-water. Best tools. Looking fine 
+Just-add-water. Best tools. Looking fine.
 
 | ![](img/zsh.gif) | ![](img/albert.gif) |
 | :---         |    ---:      |
@@ -8,6 +8,8 @@ Just-add-water. Best tools. Looking fine
 | ![](img/themes.gif) | ![](img/icons.gif)  |
 
 Ubuntu 16.04/18.04 Post install scripts.
+
+UPD: That scripts was kind of very first try. Check out improved [second one](https://github.com/andreystarkov/humanization)
 
 ### Usage:
 
