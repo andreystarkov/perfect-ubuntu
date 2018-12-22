@@ -1,15 +1,11 @@
-### Perfect Ubuntu
+### Ubuntu 16.04/18.04 Post install scripts.
 
-Just-add-water. Best tools. Looking fine.
+That scripts was kind of very first try to create ubuntu that doesn't suck. Check out improved [second one](https://github.com/andreystarkov/humanization)
 
 | ![](img/zsh.gif) | ![](img/albert.gif) |
 | :---         |    ---:      |
 | ![](img/plank.gif) | ![](img/panel.gif) |
 | ![](img/themes.gif) | ![](img/icons.gif)  |
-
-Ubuntu 16.04/18.04 Post install scripts.
-
-UPD: That scripts was kind of very first try. Check out improved [second one](https://github.com/andreystarkov/humanization)
 
 ### Usage:
 
